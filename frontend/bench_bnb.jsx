@@ -6,9 +6,19 @@ import { login, logout } from './actions/session_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById ('root');
-  const store = configureStore();
+  let store;
+
+  if (window.currentUser) {
+    const preloadedState = { session: window.currentUser };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = configureStore();
+  }
+
   window.login = login;
   window.store = store;
   window.logout = logout;
+
   ReactDOM.render(<Root store={ store }/>, root);
 });

@@ -2,4 +2,6 @@ json.currentUser do
   json.(user, :id, :username)
 end
 
-json.errors user.errors
+json.errors do
+  json.array! user.errors
+end

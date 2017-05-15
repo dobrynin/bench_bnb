@@ -1,27 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class Greeting extends React.Component {
+const sessionLinks = () => (
+  <nav>
+    <Link to="/login">Login</Link>
+    <Link to="/signup">Sign up!</Link>
+  </nav>
+);
 
-  render () {
-    debugger
-    const user = this.props.currentUser;
-    if (this.props.currentUser) {
-      return (
-        <div>
-          <h1>Welcome {user}</h1>
-          <button onClick={this.props.logout}>Sign Out</button>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/login">Sign In</Link>
-        </div>
-      );
-    }
-  }
-}
+const personalGreeting = (currentUser, logout) => (
+	<hgroup>
+    <h2>Hi, {currentUser.username}!</h2>
+    <button onClick={logout}>Log Out</button>
+	</hgroup>
+);
+
+const Greeting = ({ currentUser, logout }) => {
+  return (
+  currentUser ? personalGreeting(currentUser, logout) : sessionLinks()
+);};
 
 export default Greeting;
