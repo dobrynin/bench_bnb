@@ -31,20 +31,20 @@ class SessionForm extends React.Component {
     const otherForm = (this.props.formType === "login") ? 'signup' : 'login';
     let errors;
     if (this.props.errors) {
-      errors = this.props.errors.map(error => <p>error</p>);
+      errors = this.props.errors.map((error, idx) => <p key={idx}>{error}</p>);
     }
 
 
     return (
       <div>
-        <header>{this.props.formType}</header>
+        <header>{this.props.formType === "login" ? "Log In" : "Sign Up"}</header>
         <Link to={`/${otherForm}`} />
         {errors}
         <form onSubmit={this.handleSubmit}>
-          <label>
+          <label>Username
             <input type="text" value={this.state.username} onChange={this.update('username')} />
           </label>
-          <label>
+          <label>Password
             <input type='password' value={this.state.password} onChange={this.update('password')} />
           </label>
           <button>Submit</button>

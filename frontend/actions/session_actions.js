@@ -5,19 +5,19 @@ export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const login = user => dispatch => (
   APIUtil.login(user.username, user.password)
   .then(session => dispatch(receiveCurrentUser(session.currentUser)),
-  session => dispatch(receiveErrors(session.errors)))
+  err => dispatch(receiveErrors(err.responseJSON)))
 );
 
 export const logout = () => dispatch => (
   APIUtil.logout()
   .then(session => dispatch(receiveCurrentUser(null)),
-  session => dispatch(receiveErrors(session.errors)))
+  err => dispatch(receiveErrors(err.responseJSON)))
 );
 
 export const signup = user => dispatch => (
   APIUtil.signup(user.username, user.password)
   .then(session => dispatch(receiveCurrentUser(session.currentUser)),
-  session => dispatch(receiveErrors(session.errors)))
+  err => dispatch(receiveErrors(err.responseJSON)))
 );
 
 export const receiveCurrentUser = user => ({
